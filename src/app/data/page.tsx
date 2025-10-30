@@ -21,7 +21,6 @@ export default function DataPage() {
                 <th className="px-4 py-3">About</th>
                 <th className="px-4 py-3">Address</th>
                 <th className="px-4 py-3">Birthdate</th>
-                <th className="px-4 py-3">Step</th>
                 <th className="px-4 py-3">Updated</th>
               </tr>
             </thead>
@@ -32,7 +31,6 @@ export default function DataPage() {
                   <td className="px-4 py-3 max-w-xs truncate">{row.about_me}</td>
                   <td className="px-4 py-3">{[row.street_address, row.city, row.state, row.zip].filter(Boolean).join(", ")}</td>
                   <td className="px-4 py-3">{row.birthdate || ""}</td>
-                  <td className="px-4 py-3">{row.current_step}</td>
                   <td className="px-4 py-3">{new Date(row.updated_at).toLocaleString()}</td>
                 </tr>
               ))}
