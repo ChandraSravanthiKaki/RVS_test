@@ -1,0 +1,14 @@
+"use client";
+
+import { createClient } from "@supabase/supabase-js";
+
+// Browser client for client components
+export const supabaseBrowser = () => {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+  );
+};
+
+
+

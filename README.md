@@ -1,3 +1,31 @@
+## Custom Onboarding Flow (Next.js + Supabase)
+
+### Setup
+- Create a Supabase project and copy the Project URL, anon key, and service role key.
+- Add env vars:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY` (server-only)
+
+### Database
+Run the SQL in `db.sql` in the Supabase SQL editor to create tables.
+
+### Develop
+```bash
+npm install
+npm run dev
+```
+
+### Routes
+- `/` Landing page (matches provided theme) with Register CTA.
+- `/onboarding` 3-step wizard. Step 2/3 components are configurable.
+- `/admin` Admin to assign components to step 2 and 3 (no auth).
+- `/data` Live table of user data (no auth, auto-refresh).
+
+### Notes
+- Uses Supabase Auth for email/password sign-up on step 1.
+- Progress is saved to the `onboarding` table; returning users resume where they left off.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
