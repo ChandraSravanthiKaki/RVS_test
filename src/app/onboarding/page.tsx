@@ -29,6 +29,7 @@ export default function OnboardingPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [initialEmail, setInitialEmail] = useState<string | null>(null);
 
   const [about, setAbout] = useState("");
   const [birthdate, setBirthdate] = useState("");
@@ -117,6 +118,7 @@ export default function OnboardingPage() {
       const d = await res.json();
       setStep(d.step ?? 1);
       setEmail(d.email ?? "");
+      setInitialEmail(d.email ?? null);
       setAbout(d.about ?? "");
       setBirthdate(d.birthdate ?? "");
       setStreet(d.street ?? "");
@@ -153,8 +155,13 @@ export default function OnboardingPage() {
         setLoading(false);
         return;
       }
-      // Create local user id if not exists
+      // Create a new user if none exists, or if the email has changed from the resumed user
       let userId = typeof window !== "undefined" ? localStorage.getItem("onboarding_user_id") : null;
+      if (userId && initialEmail && initialEmail !== email) {
+        // Start a brand-new registration for a different email
+        localStorage.removeItem("onboarding_user_id");
+        userId = null;
+      }
       if (!userId) {
         const res = await fetch("/api/onboarding", {
           method: "POST",
